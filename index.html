@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app='toDo'>
+    <head>
+        <title>Angular ToDo</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <script src='bower_components/jquery/dist/jquery.min.js'></script>
+        <script src='bower_components/bootstrap/dist/js/bootstrap.js'></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+        <script src="client/directives/toDoDirective.js"></script>
+        <script src='client/controllers/mainCtrl.js'></script>
+        <script src="client/app.js"></script>
+
+    </head>
+    <body>
+      <div class='container' ng-controller='mainCtrl'>
+
+        <div class='row'>
+            <h1>Things to do <small> by Taylor Harwin </small> </h1>
+        </div>
+
+    <!--the todo post area !-->
+        <div class='row'>
+            <form class='form-inline' ng-submit='postTodo()'>
+              <input class='form-control' type="text" ng-model='newTask' placeholder ='enter a task' />
+              <span>Priority:</span>
+              <select class='form-control' ng-model='newPriority'>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <button type="submit" class="btn btn-default form-control" value='Submit'>Submit</button>
+            </form>
+        </div>
+
+        <div class='row'>
+            <h5 class='col-md-4'>Your Task</h5>
+            <h5 class='col-md-2'>Due Date</h5>
+            <h5 class='col-md-2'>Completion Status</h5>
+            <h5 class='col-md-4'>Actions</h5>
+        </div>
+
+
+    <!--tasks to complete !-->
+
+        <script type="text/ng-template" id="dothis.html">
+            <div>
+                <button ng-click='sayHid()' class="col-md-4">{{contents.task}}</button>
+                <span class="col-md-2">{{contents.priority}}</span>
+                <span class="col-md-2">{{contents.completion}}</span>
+                <span class="col-md-4 btn-group">
+                    <button type="button" class="btn btn-default">Edit</button>
+                    <button type="button" class="btn btn-default">Mark Complete</button>
+                    <button type="button" class="btn btn-default">Delete</button>
+                </span>
+            </div>
+        </script>
+
+        <div ng-repeat='assignment in list'>
+            <dothis contents='assignment'></dothis>
+        </div>
+    
+    </body>
+</html>

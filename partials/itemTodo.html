@@ -1,0 +1,12 @@
+<li ng-repeat="task in contents track by $index">
+  <div class="row" ng-click='editing()'> 
+    <span class="col-md-5">{{task.text }}</span>
+    <span class="col-md-2">{{task.date}}</span>
+    <span class="col-md-3 btn-group">{{task.completion}}
+      <button type="button" class="btn btn-default">Edit</button>
+      <button type="button" class="btn btn-default">Mark Complete</button>
+      <button type="button" class="btn btn-default">Delete</button>
+    </span>
+  </div>
+</li>
+
