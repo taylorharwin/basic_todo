@@ -14,16 +14,21 @@ angular.module('app.directives', [])
      link: function (scope, element) {
         console.log(scope.index);
 
+        scope.completion = false;
+
         scope.edit = function(){
           alert('hi');
         };
         scope.delete = function(){
           var toDelete = scope.list[scope.index];
-          scope.list.splice(scope.index, 1);
-          console.log(toDelete);
+          var status = confirm('sure you want do delete ' + '"' + toDelete.task+ ' ?');
+          if (status){
+            scope.list.splice(scope.index, 1);
+            console.log(toDelete);
+          }
         };
-        scope.markComplete = function(){
-          console.log(scope.list);
+        scope.toggleComplete = function(){
+          scope.contents.completion = !scope.contents.completion;
         };
      }
    };

@@ -49,8 +49,9 @@
                 <span class="col-md-2">{{contents.priority}}</span>
                 <span class="col-md-2">{{contents.completion}}</span>
                 <span class="col-md-4 btn-group">
-                    <button type="button" ng-click='edit()' class="btn btn-default">Edit</button>
-                    <button type="button" ng-click='markComplete()' class="btn btn-default">Mark Complete</button>
+                    <button type="button" ng-hide='contents.completion' ng-click='edit()' class="btn btn-default">Edit</button>
+                    <button type="button" ng-hide='contents.completion' ng-click='toggleComplete()' class="btn btn-default">Mark Complete</button>
+                    <button type="button" ng-show='contents.completion' ng-click='toggleComplete()'class="btn btn-warning">Reopen</button>
                     <button type="button" ng-click='delete()' class="btn btn-default">Delete</button>
                 </span>
             </div>
