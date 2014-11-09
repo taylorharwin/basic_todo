@@ -14,10 +14,11 @@ angular.module('app.directives', [])
      link: function (scope, element) {
         console.log(scope.index);
 
-        scope.completion = false;
+        scope.editing = false;
 
         scope.edit = function(){
-          alert('hi');
+          scope.editing = !scope.editing;
+          console.log(scope.editing);
         };
         scope.delete = function(){
           var toDelete = scope.list[scope.index];

@@ -34,10 +34,10 @@
         </div>
 
         <div class='row'>
-            <h5 class='col-md-4'>Your Task</h5>
-            <h5 class='col-md-2'>Due Date</h5>
-            <h5 class='col-md-2'>Completion Status</h5>
-            <h5 class='col-md-4'>Actions</h5>
+            <h5 class='col-xs-4'>Your Task</h5>
+            <h5 class='col-xs-2'>Priority</h5>
+            <h5 class='col-xs-2'>Completion Status</h5>
+            <h5 class='col-xs-4'>Actions</h5>
         </div>
 
 
@@ -45,11 +45,20 @@
 
         <script type="text/ng-template" id="dothis.html">
             <div>
-                <span ng-click='sayHid()' class="col-md-4">{{contents.task}}</span>
-                <span class="col-md-2">{{contents.priority}}</span>
-                <span class="col-md-2">{{contents.completion}}</span>
-                <span class="col-md-4 btn-group">
-                    <button type="button" ng-hide='contents.completion' ng-click='edit()' class="btn btn-default">Edit</button>
+                <span ng-hide='editing' class="col-xs-4">{{contents.task}}</span>
+                <span ng-show='editing' class='col-xs-4'>
+                    <input class='form-control' type='text' ng-model=contents.task value='{{contents.task}}'/>
+                </span>
+                 
+
+
+
+
+                <span class="col-xs-2">{{contents.priority}}</span>
+                <span class="col-xs-2">{{contents.completion}}</span>
+                <span class="col-xs-4 btn-group">
+                    <button type="button" ng-hide='editing' ng-click='edit()' class="btn btn-default">Edit</button>
+                    <button type="button" ng-show='editing' ng-click='edit()'class="btn btn-info">Update</button>
                     <button type="button" ng-hide='contents.completion' ng-click='toggleComplete()' class="btn btn-default">Mark Complete</button>
                     <button type="button" ng-show='contents.completion' ng-click='toggleComplete()'class="btn btn-warning">Reopen</button>
                     <button type="button" ng-click='delete()' class="btn btn-default">Delete</button>
