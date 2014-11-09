@@ -45,19 +45,19 @@
 
         <script type="text/ng-template" id="dothis.html">
             <div>
-                <button ng-click='sayHid()' class="col-md-4">{{contents.task}}</button>
+                <span ng-click='sayHid()' class="col-md-4">{{contents.task}}</span>
                 <span class="col-md-2">{{contents.priority}}</span>
                 <span class="col-md-2">{{contents.completion}}</span>
                 <span class="col-md-4 btn-group">
-                    <button type="button" class="btn btn-default">Edit</button>
-                    <button type="button" class="btn btn-default">Mark Complete</button>
-                    <button type="button" class="btn btn-default">Delete</button>
+                    <button type="button" ng-click='edit()' class="btn btn-default">Edit</button>
+                    <button type="button" ng-click='markComplete()' class="btn btn-default">Mark Complete</button>
+                    <button type="button" ng-click='delete()' class="btn btn-default">Delete</button>
                 </span>
             </div>
         </script>
 
-        <div ng-repeat='assignment in list'>
-            <dothis contents='assignment'></dothis>
+        <div ng-repeat='assignment in list track by $index'>
+            <dothis index="{{$index}}" list='list' contents='assignment'></dothis>
         </div>
     
     </body>

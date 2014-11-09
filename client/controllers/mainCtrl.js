@@ -12,8 +12,4 @@ angular.module('app.controllers', ['app.directives'])
         $scope.text = '';
     };
 
-    $scope.sayHi = function(){
-      console.log('hi');
-    };
-
 });
