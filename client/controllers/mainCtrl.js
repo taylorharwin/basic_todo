@@ -18,6 +18,7 @@ angular.module('app.controllers', ['app.directives', 'app.services'])
       $scope.text = '';
       $scope.localStorageUtils.writeList($scope.list);
       $scope.list = JSON.parse($scope.localStorageUtils.readList());
+      return {task: $scope.newTask, priority: $scope.newPriority, completion: $scope.completion};
     };
 
     //This logic checks whether there are any tasks in local storage (it's been used before); 
@@ -45,7 +46,6 @@ angular.module('app.controllers', ['app.directives', 'app.services'])
      $scope.list = $scope.list.concat($scope.trash);
      $scope.trash = [];
      $scope.localStorageUtils.writeList($scope.list);
-     console.log($scope.list);
     };
 
 });
