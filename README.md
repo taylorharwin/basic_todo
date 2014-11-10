@@ -10,7 +10,7 @@ The repo consists of the following file structure:
 * Controllers: The app has one controller. The controller is reponsible for keeping track of the overall list of things to do, as well as a parallel list of deleted things to do. It has minimal logic.
 * Directives: The layout and behavior for an individual item to do is contained in a custom directive. This made sense given that the app would have many repeated to-dos, all with idential functionality. 
 * Services: There is one service that interfaces with the local storage API, and is injected into the directive and controller modules
-* bower.json: The third-party dependencies for this app are bootstrap (only CSS is used), and AngularJS
+* bower.json: The third-party dependencies for this app are bootstrap (only CSS is used), AngularJS, and angular-mocks, a module used for mocking modules for testing
 * index.html: Loads all required scripts, and templates. 
 * karma.conf.js: Loads all front-end unit tests
 * test/: Includes test scripts, written with Jasmine, for services and controllers
