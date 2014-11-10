@@ -26,7 +26,7 @@ For more detailed technical documentation, please read through the source files 
 (Assumes you have Bower installed)
 
 1. Clone this repository locally and `cd` into it
-2. Run 'bower install' from the command line.
+2. IMPORTANT: Run 'bower install' from the command line.
 3. Open 'index.html', from the top-level directory, in any modern web browser
 
 
