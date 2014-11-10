@@ -1,6 +1,6 @@
-angular.module('app.directives', [])
+angular.module('app.directives', ['app.services'])
 
-.directive('dothis', function () {
+.directive('dothis', function (localStorageUtils) {
 
     return {restrict: 'E',
      replace: 'true',
@@ -8,28 +8,32 @@ angular.module('app.directives', [])
      scope: {
       contents: '=contents',
       index:'@',
-      list: '=list'
+      list: '=list',
+      trash: '=trash'
      },
 
      link: function (scope, element) {
-        console.log(scope.index);
+        scope.localStorageUtils = localStorageUtils;
 
         scope.editing = false;
 
         scope.edit = function(){
           scope.editing = !scope.editing;
-          console.log(scope.editing);
+          scope.localStorageUtils.writeList(scope.list);
         };
         scope.delete = function(){
           var toDelete = scope.list[scope.index];
-          var status = confirm('sure you want do delete ' + '"' + toDelete.task+ ' ?');
-          if (status){
+          var proceeding = confirm('sure you want do delete ' + '"' + toDelete.task+ ' ?');
+          if (proceeding){
+            scope.trash.push(toDelete);
             scope.list.splice(scope.index, 1);
-            console.log(toDelete);
+            scope.localStorageUtils.writeList(scope.list);
+
           }
         };
         scope.toggleComplete = function(){
           scope.contents.completion = !scope.contents.completion;
+          scope.localStorageUtils.writeList(scope.list);
         };
      }
    };

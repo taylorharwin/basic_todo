@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html ng-app='toDo'>
+
+<!-- The app is instantiated here
+ --><html ng-app='toDo'>
     <head>
         <title>Angular ToDo</title>
+
+        <!-- All styles come from Bootstrap CSS-->        
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-        <script src='bower_components/jquery/dist/jquery.min.js'></script>
-        <script src='bower_components/bootstrap/dist/js/bootstrap.js'></script>
+
+        <!-- The only third-party JS dependency is Angular-->        
         <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
+
+        <!-- Client code is divided into directive, controller, services and app modules. app.js simply loads all dependencies-->        
         <script src="client/directives/toDoDirective.js"></script>
         <script src='client/controllers/mainCtrl.js'></script>
+        <script src='client/services/services.js'></script>
         <script src="client/app.js"></script>
 
     </head>
@@ -19,7 +25,7 @@
             <h1>Things to do <small> by Taylor Harwin </small> </h1>
         </div>
 
-    <!--the todo post area !-->
+        <!--the todo post area !-->
         <div class='row'>
             <form class='form-inline' ng-submit='postTodo()'>
               <input class='form-control' type="text" ng-model='newTask' placeholder ='enter a task' />
@@ -31,8 +37,10 @@
               </select>
               <button type="submit" class="btn btn-default form-control" value='Submit'>Submit</button>
             </form>
+              <button ng-show='trash.length > 0' ng-click='restoreDeletedTodos()'  class="btn btn-info">Restore Deleted Tasks: {{trash.length}}</button>
         </div>
 
+        <!-- The header row for all tasks-->
         <div class='row'>
             <h5 class='col-xs-4'>Your Task</h5>
             <h5 class='col-xs-2'>Priority</h5>
@@ -41,21 +49,20 @@
         </div>
 
 
-    <!--tasks to complete !-->
-
+        <!--The template used by the 'dothis' Directive. Has to be loaded with index.html inside script tags to work in Chrome!-->
         <script type="text/ng-template" id="dothis.html">
             <div>
                 <span ng-hide='editing' class="col-xs-4">{{contents.task}}</span>
                 <span ng-show='editing' class='col-xs-4'>
                     <input class='form-control' type='text' ng-model=contents.task value='{{contents.task}}'/>
                 </span>
-                 
-
-
-
-
                 <span class="col-xs-2">{{contents.priority}}</span>
-                <span class="col-xs-2">{{contents.completion}}</span>
+
+                <span class="col-xs-2">
+                    <span ng-hide='contents.completion' class="label label-warning">Incomplete</span>
+                    <span ng-show='contents.completion' class="label label-success">Done</span>
+                </span>
+
                 <span class="col-xs-4 btn-group">
                     <button type="button" ng-hide='editing' ng-click='edit()' class="btn btn-default">Edit</button>
                     <button type="button" ng-show='editing' ng-click='edit()'class="btn btn-info">Update</button>
@@ -66,8 +73,10 @@
             </div>
         </script>
 
+
+        <!--The invocation of directives, where each one corresponds to a task in the list. Note that they are wrapped in ng-repeat-->
         <div ng-repeat='assignment in list track by $index'>
-            <dothis index="{{$index}}" list='list' contents='assignment'></dothis>
+            <dothis index="{{$index}}" trash='trash' list='list' contents='assignment'></dothis>
         </div>
     
     </body>
